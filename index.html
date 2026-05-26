@@ -1,0 +1,2445 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Henrik Alex Sørensen — Hjem til dig selv · 3-dages workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --cream: #F5F0E8;
+  --cream-2: #EFE7DA;
+  --cream-3: #E6DCC9;
+  --navy: #1C2B4A;
+  --navy-2: #2A3B5E;
+  --black: #000;
+  --brown: #4A4035;
+  --brown-2: #6B5E50;
+  --sand: #B09A80;
+  --sand-2: #C9B89E;
+  --line: rgba(28, 43, 74, 0.12);
+  --line-strong: rgba(28, 43, 74, 0.28);
+
+  --serif: "Instrument Serif", "Iowan Old Style", "Georgia", serif;
+  --sans: "Geist", "Helvetica Neue", sans-serif;
+  --mono: "JetBrains Mono", "Menlo", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--brown);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--navy); color: var(--cream); }
+
+/* ---------- Layout ---------- */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+.wrap-tight { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+section { position: relative; }
+
+/* ---------- Type utilities ---------- */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sand);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--sand);
+  display: inline-block;
+}
+.eyebrow.plain::before { display: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+}
+.h-display {
+  font-size: clamp(56px, 8.5vw, 124px);
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+.h-1 { font-size: clamp(40px, 5.8vw, 78px); line-height: 1.02; }
+.h-2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.04; }
+.h-3 { font-size: clamp(24px, 2.5vw, 32px); line-height: 1.15; }
+.it { font-style: italic; color: var(--sand); }
+
+.lede {
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.55;
+  color: var(--brown);
+  max-width: 56ch;
+  font-weight: 400;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 30px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+  white-space: nowrap;
+}
+.btn .arrow {
+  width: 18px; height: 10px;
+  position: relative;
+  transition: transform .25s ease;
+}
+.btn .arrow::before,
+.btn .arrow::after {
+  content: ""; position: absolute; right: 0; top: 50%;
+  background: currentColor;
+}
+.btn .arrow::before { width: 18px; height: 1.5px; transform: translateY(-50%); }
+.btn .arrow::after {
+  width: 8px; height: 1.5px; transform-origin: right center;
+  transform: translateY(-50%) rotate(40deg); top: calc(50% - 3px);
+}
+.btn:hover .arrow { transform: translateX(4px); }
+
+.btn-primary { background: var(--navy); color: var(--cream); }
+.btn-primary:hover { background: var(--navy-2); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--line-strong);
+}
+.btn-ghost:hover { border-color: var(--navy); background: rgba(28, 43, 74, 0.04); }
+
+.btn-light {
+  background: var(--cream);
+  color: var(--navy);
+}
+.btn-light:hover { background: var(--cream-2); }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  transition: padding .3s ease;
+}
+.nav-inner {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 1240px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px 14px 24px;
+  border-radius: 999px;
+  background: rgba(245, 240, 232, 0.72);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(28, 43, 74, 0.08);
+  transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.nav.scrolled .nav-inner {
+  background: rgba(245, 240, 232, 0.92);
+  box-shadow: 0 8px 32px -16px rgba(28, 43, 74, 0.18);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+.brand-logo {
+  height: 64px;
+  width: 64px;
+  display: block;
+  object-fit: contain;
+}
+.brand-mark {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--navy);
+  display: grid; place-items: center;
+  color: var(--cream);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 400;
+}
+.nav-links a {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--brown);
+  transition: background .2s ease, color .2s ease;
+}
+.nav-links a:hover { background: rgba(28, 43, 74, 0.06); color: var(--navy); }
+.nav-cta {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .2s ease;
+}
+.nav-cta:hover { background: var(--navy-2); }
+
+.menu-toggle { display: none; }
+
+@media (max-width: 880px) {
+  .nav-links, .nav-cta { display: none; }
+  .menu-toggle {
+    display: grid; place-items: center;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: transparent;
+    cursor: pointer;
+  }
+  .menu-toggle span {
+    display: block; width: 18px; height: 1.5px; background: var(--navy);
+    position: relative;
+  }
+  .menu-toggle span::before, .menu-toggle span::after {
+    content: ""; position: absolute; left: 0; width: 18px; height: 1.5px; background: var(--navy);
+  }
+  .menu-toggle span::before { top: -6px; }
+  .menu-toggle span::after { top: 6px; }
+}
+
+/* ---------- Hero (full-bleed image) ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  height: 860px;
+  max-height: 1000px;
+  overflow: hidden;
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 120px 0 56px;
+  background: #000;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 28%;
+  z-index: 0;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 35%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.1) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 25%, transparent 45%, rgba(0, 0, 0, 0.9) 92%, #000 100%);
+}
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.35;
+  background-image: radial-gradient(circle at 80% 80%, rgba(176, 154, 128, 0.25), transparent 55%);
+}
+.hero-inner { position: relative; z-index: 3; }
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.85);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--sand);
+  box-shadow: 0 0 0 4px rgba(176, 154, 128, 0.22);
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 16ch;
+  color: var(--cream);
+  font-weight: 400;
+}
+.hero h1 .softer {
+  color: var(--sand-2);
+  font-style: italic;
+}
+.hero-sub {
+  margin-top: 28px;
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.55;
+  color: rgba(245, 240, 232, 0.85);
+  max-width: 48ch;
+}
+
+.hero-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 48px;
+  margin-top: 64px;
+}
+.hero-cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+.hero-meta-row {
+  display: flex;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+.hero-meta-row .k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.6);
+  margin-bottom: 8px;
+}
+.hero-meta-row .v {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--cream);
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+}
+
+.hero .btn-primary { background: var(--cream); color: var(--navy); }
+.hero .btn-primary:hover { background: var(--cream-2); }
+.hero .btn-ghost { color: var(--cream); border-color: rgba(245, 240, 232, 0.35); }
+.hero .btn-ghost:hover { border-color: var(--cream); background: rgba(245, 240, 232, 0.08); }
+
+/* placeholder image */
+.ph {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(28, 43, 74, 0.18), rgba(74, 64, 53, 0.08)),
+    repeating-linear-gradient(45deg, rgba(176, 154, 128, 0.35) 0 14px, rgba(176, 154, 128, 0.22) 14px 28px);
+  background-color: var(--cream-3);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.ph::after {
+  content: attr(data-label);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(28, 43, 74, 0.7);
+  background: rgba(245, 240, 232, 0.85);
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+.ph.dark {
+  background:
+    linear-gradient(135deg, rgba(28, 43, 74, 0.55), rgba(28, 43, 74, 0.85)),
+    repeating-linear-gradient(45deg, rgba(176, 154, 128, 0.18) 0 14px, transparent 14px 28px);
+  background-color: var(--navy);
+}
+.ph.dark::after {
+  background: rgba(28, 43, 74, 0.6);
+  color: var(--cream);
+  border-color: rgba(176, 154, 128, 0.4);
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding: 120px 0;
+}
+.section-tight { padding: 80px 0; }
+
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  margin-bottom: 64px;
+  align-items: end;
+}
+.section-head .label { padding-top: 8px; }
+.section-head h2 { max-width: 18ch; }
+
+/* ---------- Intro (centered, dark moment) ---------- */
+.intro {
+  background: #000;
+  color: var(--cream);
+  padding: 140px 0 160px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(176, 154, 128, 0.08), transparent 55%),
+    radial-gradient(ellipse at 80% 90%, rgba(176, 154, 128, 0.05), transparent 50%);
+  pointer-events: none;
+}
+.intro > .wrap { position: relative; z-index: 1; }
+.intro-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sand-2);
+  font-weight: 500;
+  margin-bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.intro-eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--sand);
+}
+.intro h2 {
+  max-width: 18ch;
+  margin: 0 auto 72px;
+  text-wrap: balance;
+  color: var(--cream);
+}
+.intro h2 .it { color: var(--sand-2); }
+.intro-img {
+  height: clamp(520px, 86vw, 1000px);
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #0A0A0B;
+  background-size: cover;
+  background-position: center;
+  width: calc(100% + 0px);
+  max-width: 1480px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 60px 140px -40px rgba(0, 0, 0, 0.9);
+}
+.intro-img-frame {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+}
+.intro-img-quote {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  z-index: 2;
+  pointer-events: none;
+}
+.intro-img-quote-inner {
+  max-width: 46ch;
+  text-align: center;
+  color: var(--cream);
+  padding: 44px 48px 38px;
+  border-radius: 20px;
+  background: rgba(20, 30, 55, 0.32);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  border: 1px solid rgba(245, 240, 232, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(245, 240, 232, 0.12),
+    0 30px 60px -20px rgba(0, 0, 0, 0.5);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .intro-img-quote-inner { background: rgba(20, 30, 55, 0.72); }
+}
+.intro-img-quote-mark {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(48px, 5vw, 80px);
+  line-height: 0.5;
+  color: var(--sand-2);
+  display: block;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+.intro-img-quote-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(20px, 1.9vw, 30px);
+  line-height: 1.4;
+  color: var(--cream);
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+.intro-img-quote-rule {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: rgba(245, 240, 232, 0.5);
+  margin: 32px auto 18px;
+}
+.intro-img-quote-attr {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.78);
+}
+@media (max-width: 700px) {
+  .intro-img-quote { padding: 24px; }
+  .intro-img-quote-inner { padding: 28px 24px 24px; border-radius: 16px; }
+  .intro-img-quote-text { font-size: clamp(15px, 4vw, 19px); line-height: 1.45; }
+  .intro-img-quote-rule { margin: 22px auto 14px; }
+}
+
+.proof {
+  margin-top: 140px;
+  text-align: center;
+}
+.proof h3 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4.6vw, 56px);
+  line-height: 1.05;
+  color: var(--cream);
+  letter-spacing: -0.015em;
+  max-width: 22ch;
+  margin: 0 auto 24px;
+  font-weight: 400;
+}
+.proof h3 .it { color: var(--sand-2); }
+.proof p.proof-sub {
+  max-width: 56ch;
+  margin: 0 auto 72px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(245, 240, 232, 0.7);
+}
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(245, 240, 232, 0.12);
+  border-top: 1px solid rgba(245, 240, 232, 0.12);
+  border-bottom: 1px solid rgba(245, 240, 232, 0.12);
+}
+.principle {
+  padding: 48px 32px 44px;
+  background: #000;
+  text-align: left;
+}
+.principle-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--sand-2);
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+.principle-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.principle-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(245, 240, 232, 0.72);
+}
+
+/* ---------- Benefits (dark, centered) ---------- */
+.benefits {
+  background: #000;
+  color: var(--cream);
+  padding: 140px 0 160px;
+  position: relative;
+  overflow: hidden;
+}
+.benefits::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://res.cloudinary.com/dssjlvoft/image/upload/v1779478683/e4c64cb8-ad42-4c46-a3b6-120deb34b34e_nc5gmc.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.benefits::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.75) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.benefits > .wrap { position: relative; z-index: 1; }
+.benefits-head {
+  text-align: center;
+  margin-bottom: 96px;
+}
+.benefits-head .eyebrow { color: var(--sand-2); margin-bottom: 32px; justify-content: center; }
+.benefits-head .eyebrow::before { display: none; }
+.benefits-head .eyebrow .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--sand); display: inline-block; margin-right: 10px;
+}
+.benefits-head h2 {
+  color: var(--cream);
+  font-size: clamp(64px, 9vw, 132px);
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  margin: 0 auto;
+  max-width: 14ch;
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 64px 56px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.benefit {
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+  transition: none;
+}
+.benefit:hover { background: transparent; }
+.benefit-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: rgba(245, 240, 232, 0.10);
+  border: 1px solid rgba(245, 240, 232, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  margin-bottom: 32px;
+  color: var(--cream);
+}
+.benefit-icon svg { width: 18px; height: 18px; stroke-width: 1.5; }
+.benefit-num { display: none; }
+.benefit h3 {
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 0 0 12px;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+.benefit p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(245, 240, 232, 0.78);
+  max-width: 32ch;
+}
+
+/* ---------- Om Henrik (med billed-marquee) ---------- */
+.about {
+  background: var(--cream);
+  padding: 140px 0 0;
+  overflow: hidden;
+}
+.about-top {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 96px;
+  align-items: start;
+  padding-bottom: 96px;
+}
+.about-top h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--navy);
+  font-size: clamp(56px, 7.5vw, 108px);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  max-width: 14ch;
+}
+.about-top h2 .it { color: var(--sand); font-style: italic; }
+.about-copy {
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 44ch;
+}
+.about-copy .eyebrow { margin-bottom: 4px; }
+.about-copy p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--brown);
+}
+.about-copy p.lead {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--navy);
+}
+
+.strip {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 120px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+}
+.strip-track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  animation: strip-scroll 80s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+}
+.strip:hover .strip-track { animation-play-state: paused; }
+.strip-slide {
+  flex: 0 0 auto;
+  width: clamp(280px, 26vw, 440px);
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--cream-3);
+}
+.strip-slide.tall { aspect-ratio: 3 / 4; }
+.strip-slide.square { aspect-ratio: 1 / 1; }
+.strip-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@keyframes strip-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 11px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .strip-track { animation: none; }
+  .strip { overflow-x: auto; }
+}
+
+.henrik-cutout {
+  position: absolute;
+  left: clamp(-30px, 2vw, 40px);
+  bottom: -10px;
+  height: clamp(340px, 40vw, 540px);
+  width: auto;
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(0 30px 40px rgba(28, 43, 74, 0.28))
+          drop-shadow(0 8px 16px rgba(28, 43, 74, 0.18));
+}
+@media (max-width: 880px) {
+  .henrik-cutout { height: clamp(220px, 55vw, 320px); left: -24px; bottom: -8px; opacity: 0.95; }
+}
+@media (max-width: 880px) {
+  .about { padding-top: 96px; }
+  .about-top { grid-template-columns: 1fr; gap: 32px; padding-bottom: 64px; }
+  .about-copy { padding-top: 0; }
+  .strip-slide { width: clamp(220px, 60vw, 320px); }
+  .strip { padding-bottom: 80px; }
+}
+
+/* ---------- Agenda (light) ---------- */
+.agenda {
+  background: var(--cream-2);
+  color: var(--brown);
+  border-radius: 32px;
+  padding: 100px 80px;
+  margin: 40px 0;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--line);
+}
+.agenda::before {
+  content: "";
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(176, 154, 128, 0.18), transparent 65%);
+  pointer-events: none;
+}
+.agenda h2 { color: var(--navy); }
+.agenda .eyebrow { color: var(--sand); }
+.agenda .eyebrow::before { background: var(--sand); }
+
+.agenda-head {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  margin-bottom: 72px;
+  align-items: end;
+}
+.agenda-head p { color: var(--brown); max-width: 48ch; }
+
+/* ---------- Timeline ---------- */
+.timeline {
+  position: relative;
+  padding: 40px 0 20px;
+}
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0, var(--line-strong) 6%, var(--line-strong) 94%, transparent 100%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--sand);
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 0 5px rgba(176, 154, 128, 0.22),
+    0 0 0 12px rgba(176, 154, 128, 0.08),
+    0 0 28px rgba(176, 154, 128, 0.55);
+  transition: top .35s cubic-bezier(.4,0,.2,1);
+  z-index: 3;
+}
+.timeline-dot::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--cream-2);
+}
+
+.timeline-day {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 120px;
+  row-gap: 24px;
+  align-items: center;
+  padding: 80px 0;
+  opacity: 0.22;
+  filter: blur(2px) saturate(.7);
+  transform: scale(.985);
+  transition: opacity .7s ease, filter .7s ease, transform .7s ease;
+}
+.timeline-day.active {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+.td-media {
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+}
+.td-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.td-media--contain { background: var(--cream-2); }
+.td-media--contain img { object-fit: contain; padding: 8px; }
+.td-content { max-width: 44ch; }
+.td-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sand);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.td-num::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--sand);
+  display: inline-block;
+}
+.td-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(34px, 3.4vw, 48px);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+.td-desc {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--brown);
+  margin-bottom: 28px;
+}
+.td-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.td-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--brown-2);
+  background: rgba(245, 240, 232, 0.4);
+}
+
+.timeline-day[data-side="right"] .td-media { grid-column: 2; }
+.timeline-day[data-side="right"] .td-content { grid-column: 1; grid-row: 1; justify-self: end; text-align: right; }
+.timeline-day[data-side="right"] .td-num,
+.timeline-day[data-side="right"] .td-tags { justify-content: flex-end; }
+.timeline-day[data-side="right"] .td-num { flex-direction: row-reverse; }
+
+@media (max-width: 880px) {
+  .timeline-line { left: 28px; }
+  .timeline-dot { left: 28px; }
+  .timeline-day,
+  .timeline-day[data-side="right"] {
+    grid-template-columns: 1fr;
+    padding: 48px 0 48px 64px;
+    column-gap: 0;
+    row-gap: 24px;
+  }
+  .timeline-day[data-side="right"] .td-media,
+  .timeline-day[data-side="right"] .td-content {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    text-align: left;
+  }
+  .timeline-day[data-side="right"] .td-num { flex-direction: row; justify-content: flex-start; }
+  .timeline-day[data-side="right"] .td-tags { justify-content: flex-start; }
+}
+
+/* ---------- Quotes Funnel ---------- */
+.quotes {
+  background: var(--cream-2);
+  padding: 140px 0 160px;
+  position: relative;
+  overflow: hidden;
+}
+.quotes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(176, 154, 128, 0.15), transparent 60%);
+  pointer-events: none;
+}
+.quotes > .wrap { position: relative; z-index: 1; }
+.quotes-head {
+  text-align: center;
+  margin-bottom: 96px;
+}
+.quotes-head .eyebrow {
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.quotes-head h2 {
+  font-size: clamp(48px, 6.5vw, 88px);
+  letter-spacing: -0.025em;
+  line-height: 1.0;
+  max-width: 18ch;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+
+.quotes-funnel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+}
+.qf-row {
+  display: grid;
+  gap: 22px;
+  width: 100%;
+}
+.qf-row.r-3 { grid-template-columns: repeat(3, 1fr); }
+.qf-row.r-2 { grid-template-columns: repeat(2, 1fr); max-width: 78%; }
+.qf-row.r-1 { grid-template-columns: 1fr; max-width: 46%; }
+
+.qf-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 30px 30px 26px;
+  box-shadow: 0 18px 50px -28px rgba(28, 43, 74, 0.16);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.qf-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 70px -28px rgba(28, 43, 74, 0.24);
+  border-color: var(--line-strong);
+}
+
+.qf-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.qf-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1;
+  padding-bottom: 2px;
+  flex-shrink: 0;
+}
+.qf-avatar.a-navy  { background: var(--navy);  color: var(--cream); }
+.qf-avatar.a-sand  { background: var(--sand);  color: var(--navy);  }
+.qf-avatar.a-brown { background: var(--brown); color: var(--cream); }
+.qf-avatar.a-anon  {
+  background: var(--cream-3);
+  color: var(--brown-2);
+  border: 1px solid var(--line-strong);
+}
+.qf-avatar.a-anon svg { width: 18px; height: 18px; opacity: .7; }
+
+.qf-id { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.qf-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: -0.005em;
+}
+.qf-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brown-2);
+}
+
+.qf-quote {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(16px, 1.15vw, 18px);
+  line-height: 1.5;
+  color: var(--navy);
+  letter-spacing: -0.005em;
+  margin: 0;
+  position: relative;
+}
+.qf-quote::before {
+  content: "\201C";
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--sand);
+  font-size: 1.6em;
+  line-height: 0.6;
+  vertical-align: -0.18em;
+  margin-right: 4px;
+}
+
+@media (max-width: 980px) {
+  .qf-row.r-3 { grid-template-columns: 1fr 1fr; }
+  .qf-row.r-2 { max-width: 100%; }
+  .qf-row.r-1 { max-width: 70%; }
+}
+@media (max-width: 680px) {
+  .qf-row,
+  .qf-row.r-3,
+  .qf-row.r-2,
+  .qf-row.r-1 {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  .quotes-funnel { gap: 16px; }
+  .qf-card { padding: 24px 22px 22px; border-radius: 20px; }
+}
+
+/* ---------- FAQ ---------- */
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+.faq-aside h2 { margin-bottom: 24px; }
+.faq-aside p { color: var(--brown); font-size: 16px; line-height: 1.6; max-width: 32ch; margin-bottom: 28px; }
+.faq-list { display: flex; flex-direction: column; }
+.faq-item {
+  border-top: 1px solid var(--line);
+}
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-q {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  padding: 28px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.9vw, 26px);
+  color: var(--navy);
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+}
+.faq-q .icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  position: relative;
+  margin-top: 4px;
+}
+.faq-q .icon::before, .faq-q .icon::after {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  background: var(--navy);
+}
+.faq-q .icon::before { width: 14px; height: 1.5px; transform: translate(-50%, -50%); }
+.faq-q .icon::after { width: 1.5px; height: 14px; transform: translate(-50%, -50%); transition: transform .3s ease; }
+.faq-item.open .faq-q .icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .45s ease;
+}
+.faq-a-inner {
+  padding-bottom: 28px;
+  padding-right: 48px;
+  color: var(--brown);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 60ch;
+}
+
+/* ---------- Final CTA (split: photo + dark block) ---------- */
+.cta-split { position: relative; overflow: hidden; }
+.cta-photo {
+  width: 100%;
+  height: clamp(420px, 49vw, 740px);
+  background-image: url('uploads/henrik_stage.jpg');
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+  background-color: #000;
+  display: block;
+}
+.cta-block {
+  background-color: #14224A;
+  background-image: url('uploads/color_ref.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--cream);
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+}
+.cta-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 34, 74, 0) 0%, rgba(20, 34, 74, 0.35) 100%);
+  pointer-events: none;
+}
+.cta-inner {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  text-wrap: balance;
+}
+.cta-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sand-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.cta-eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--sand);
+}
+.cta-block h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--cream);
+  font-size: clamp(48px, 6.4vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 auto 24px;
+  max-width: 16ch;
+}
+.cta-block h2 .it { color: var(--sand-2); font-style: italic; }
+.cta-block p.cta-sub {
+  color: rgba(245, 240, 232, 0.82);
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.55;
+  max-width: 60ch;
+  margin: 0 auto 36px;
+}
+.cta-block .btn {
+  background: var(--cream);
+  color: var(--navy);
+  padding: 14px 32px;
+  font-size: 14px;
+  border-radius: 999px;
+}
+.cta-block .btn:hover { background: var(--cream-2); }
+.cta-meta {
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 56px);
+  margin: 56px auto 0;
+  padding-top: 36px;
+  border-top: 1px solid rgba(245, 240, 232, 0.16);
+  flex-wrap: wrap;
+  max-width: 64rem;
+}
+.cm-k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sand-2); margin-bottom: 6px; }
+.cm-v { font-family: var(--serif); font-size: 19px; color: var(--cream); }
+
+/* ---------- Kalender / events ---------- */
+.calendar { padding: 140px 0 160px; background: var(--cream); }
+.calendar-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 72px;
+}
+.calendar-head p { color: var(--brown); max-width: 48ch; }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.cal-card {
+  background: var(--navy);
+  color: var(--cream);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(245, 240, 232, 0.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.cal-card:hover { transform: translateY(-3px); box-shadow: 0 24px 60px -30px rgba(28, 43, 74, 0.5); }
+
+.cal-card-head {
+  position: relative;
+  padding: 22px 24px 18px;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+}
+.cal-month {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sand-2);
+  margin-bottom: 2px;
+  line-height: 1;
+}
+.cal-days {
+  font-family: var(--serif);
+  font-size: 38px;
+  line-height: 1;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+.cal-days .sep { color: rgba(245, 240, 232, 0.4); margin: 0 4px; font-style: italic; }
+.cal-year {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.45);
+  margin-left: auto;
+  padding-bottom: 4px;
+}
+
+.cal-ribbon {
+  position: absolute;
+  top: 14px;
+  right: -36px;
+  transform: rotate(35deg);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 5px 40px;
+  font-weight: 500;
+  z-index: 2;
+}
+.cal-ribbon.open {
+  background: var(--sand);
+  color: var(--navy);
+}
+.cal-ribbon.sold {
+  background: rgba(245, 240, 232, 0.12);
+  color: rgba(245, 240, 232, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.cal-banner {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(28, 43, 74, 0.55), rgba(28, 43, 74, 0.85)),
+    repeating-linear-gradient(45deg, rgba(176, 154, 128, 0.18) 0 14px, transparent 14px 28px);
+  background-color: var(--navy-2);
+  display: grid;
+  place-items: center;
+}
+.cal-banner--photo {
+  background: none;
+  background-color: #0A0A0B;
+}
+.cal-banner--photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cal-banner--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(28, 43, 74, 0.42), rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+.cal-banner--photo .cal-banner-title {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+.cal-banner-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-style: italic;
+  color: rgba(245, 240, 232, 0.92);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+}
+.cal-banner-title .num {
+  display: block;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: var(--sand-2);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.cal-body {
+  padding: 24px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+.cal-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--cream);
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+.cal-loc {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(245, 240, 232, 0.7);
+}
+.cal-loc svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--sand-2); }
+.cal-loc-extra {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.45);
+}
+
+.cal-btn {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: var(--cream);
+  color: var(--navy);
+  transition: background .2s ease, color .2s ease;
+  border: 1px solid var(--cream);
+}
+.cal-btn:hover { background: var(--cream-2); }
+.cal-btn.muted {
+  background: transparent;
+  color: rgba(245, 240, 232, 0.55);
+  border-color: rgba(245, 240, 232, 0.18);
+  pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+  .cal-grid { grid-template-columns: repeat(2, 1fr); max-width: 740px; }
+}
+@media (max-width: 900px) {
+  .calendar { padding: 100px 0 120px; }
+  .calendar-head { grid-template-columns: 1fr; gap: 24px; }
+  .cal-grid { grid-template-columns: 1fr; max-width: 480px; }
+}
+
+/* ---------- Blog (dark horizontal scroller) ---------- */
+.blog {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 130px 0 140px;
+  position: relative;
+  overflow: hidden;
+}
+.blog::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 12% 15%, rgba(176, 154, 128, 0.10), transparent 55%),
+    radial-gradient(ellipse at 88% 85%, rgba(176, 154, 128, 0.07), transparent 60%);
+  pointer-events: none;
+}
+.blog > .wrap { position: relative; z-index: 1; }
+
+.blog-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.blog-head-left {
+  display: flex;
+  align-items: baseline;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.blog-head h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(56px, 7vw, 96px);
+  line-height: 1;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+}
+.blog-explore {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: rgba(245, 240, 232, 0.72);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: color .2s ease, gap .2s ease;
+  padding-bottom: 8px;
+}
+.blog-explore:hover { color: var(--sand-2); gap: 14px; }
+.blog-explore::after {
+  content: "\2192";
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+}
+.blog-nav {
+  display: flex;
+  gap: 12px;
+}
+.blog-nav button {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(245, 240, 232, 0.25);
+  color: var(--cream);
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1;
+}
+.blog-nav button:hover { background: rgba(245, 240, 232, 0.08); border-color: rgba(245, 240, 232, 0.5); }
+.blog-nav button:active { transform: scale(0.96); }
+.blog-nav button[disabled] { opacity: 0.35; cursor: not-allowed; }
+.blog-nav button[disabled]:hover { background: transparent; border-color: rgba(245, 240, 232, 0.25); }
+
+.blog-scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(380px, calc((100% - 48px) / 3));
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 8px;
+  margin: 0 -28px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+.blog-scroller::-webkit-scrollbar { display: none; }
+
+.blog-card {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform .35s ease;
+}
+.blog-card:hover { transform: translateY(-4px); }
+.blog-card-media {
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(245, 240, 232, 0.06);
+  position: relative;
+}
+.blog-card-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s ease;
+}
+.blog-card:hover .blog-card-media img { transform: scale(1.04); }
+.blog-card-media.ph {
+  background: linear-gradient(135deg, rgba(176, 154, 128, 0.14), rgba(176, 154, 128, 0.04));
+  display: grid; place-items: center;
+}
+.blog-card-media.ph::after {
+  content: attr(data-label);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.4);
+  text-align: center;
+  padding: 0 20px;
+}
+.blog-card-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sand-2);
+}
+.blog-card-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--cream);
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+.blog-card-excerpt {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(245, 240, 232, 0.62);
+  text-wrap: pretty;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .blog { padding: 90px 0 100px; }
+  .blog-head { flex-direction: column; align-items: flex-start; gap: 28px; margin-bottom: 40px; }
+  .blog-head-left { gap: 18px; }
+  .blog-scroller { grid-auto-columns: 82%; }
+  .blog-nav button { width: 48px; height: 48px; font-size: 18px; }
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  padding: 100px 0 40px;
+  background: var(--cream);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--line);
+}
+.footer-brand .brand { font-size: 26px; margin-bottom: 16px; }
+.footer-brand p { max-width: 36ch; color: var(--brown); font-size: 15px; line-height: 1.6; }
+.footer-col h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sand); font-weight: 500; margin-bottom: 18px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-col a { font-size: 14px; color: var(--brown); transition: color .2s ease; }
+.footer-col a:hover { color: var(--navy); }
+.footer-bottom {
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-family: var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--brown-2);
+  text-transform: uppercase;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ---------- Reveal animations ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.2, .8, .2, 1);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 880px) {
+  .hero { height: auto; min-height: 720px; padding: 110px 0 48px; }
+  .hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(20, 28, 48, 0.55) 0%, rgba(20, 28, 48, 0.35) 40%, rgba(20, 28, 48, 0.75) 100%);
+  }
+  .hero-bottom { gap: 28px; margin-top: 40px; }
+  .hero-meta-row { gap: 28px; }
+  .hero-meta-row .v { font-size: 18px; }
+}
+@media (max-width: 980px) {
+  .section-head, .agenda-head, .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .benefits-grid { grid-template-columns: 1fr 1fr; gap: 48px 40px; }
+  .principles { grid-template-columns: 1fr; }
+  .principle { padding: 40px 28px; border-bottom: 1px solid rgba(245, 240, 232, 0.14); }
+  .principle:last-child { border-bottom: 0; }
+  .agenda { padding: 60px 32px; border-radius: 24px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+@media (max-width: 620px) {
+  .section { padding: 80px 0; }
+  .benefits-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .cta-block { padding: 64px 24px 80px; }
+  .cta-photo { height: clamp(280px, 60vw, 480px); }
+  .nav-inner { padding: 10px 10px 10px 16px; }
+  .brand { font-size: 18px; }
+  .brand-mark { width: 24px; height: 24px; font-size: 14px; }
+  .brand-logo { height: 48px; width: 48px; }
+  .hero { padding-top: 110px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="Henrik Alex Sørensen — forside">
+      <img class="brand-logo" src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779788138/download-removebg-preview_x7rfiq.png" alt="Henrik Alex Sørensen">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#workshop">Workshop</a></li>
+      <li><a href="#agenda">Forløb</a></li>
+      <li><a href="#stemmer">Stemmer</a></li>
+      <li><a href="#henrik">Om Henrik</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#kalender">Datoer</a></li>
+    </ul>
+    <a href="#tilmeld" class="nav-cta">Tilmeld dig</a>
+    <button class="menu-toggle" aria-label="Menu"><span></span></button>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="top">
+  <div class="hero-bg" style="background-image: url('https://res.cloudinary.com/dssjlvoft/image/upload/v1777226055/kling_20260427_%E4%BD%9C%E5%93%81_Image1fjer_445_1_vku2me.png');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
+
+  <div class="wrap hero-inner">
+    <div class="reveal">
+      <span class="hero-eyebrow">Fysisk · 3-dages workshop · Nordjylland</span>
+    </div>
+
+    <h1 class="h-display reveal">
+      Hjem til <span class="softer">dig selv</span> igen.
+    </h1>
+
+    <p class="hero-sub reveal">En tre-dages rejse for mænd, der er trætte af at præstere sig igennem livet — og klar til at mærke sig selv på en ny måde. Uden masker. Uden alfa-kultur.</p>
+
+    <div class="hero-bottom reveal">
+      <div class="hero-cta">
+        <a href="#tilmeld" class="btn btn-primary">Sikr din plads <span class="arrow"></span></a>
+      </div>
+      <div class="hero-meta-row">
+        <div>
+          <div class="k">Dato</div>
+          <div class="v">26.–28. juni 2026</div>
+        </div>
+        <div>
+          <div class="k">Sted</div>
+          <div class="v">Nordjylland</div>
+        </div>
+        <div>
+          <div class="k">Pladser</div>
+          <div class="v">Maks. 14 mænd</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== INTRO ============== -->
+<section class="intro" id="workshop">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="intro-eyebrow">Om</span>
+    </div>
+    <h2 class="h-1 reveal">Mød dig selv på en <span class="it">ny måde.</span></h2>
+
+    <div class="intro-img reveal" style="background-image: url('https://res.cloudinary.com/dssjlvoft/image/upload/v1779463097/661176855_18575197846011770_4360949682931393459_n_kispdi.jpg');">
+      <div class="intro-img-frame"></div>
+      <figure class="intro-img-quote">
+        <div class="intro-img-quote-inner">
+          <span class="intro-img-quote-mark" aria-hidden="true">"</span>
+          <p class="intro-img-quote-text">Weekenden har rykket grænser og jeg har fået et skub på min rejse i selvudvikling, givet en større ro i mig selv og tro på, at jeg kan hvad jeg vil. Vil helt klart anbefale det til alle, for der er ikke noget at miste ved at prøve. Stor tak til dig Henrik for at gøre det her for andre og være dig selv i det hele vejen. Det har været meget inspirerende.</p>
+          <span class="intro-img-quote-rule" aria-hidden="true"></span>
+          <figcaption class="intro-img-quote-attr">Tidligere deltager</figcaption>
+        </div>
+      </figure>
+    </div>
+
+    <div class="proof">
+      <h3 class="reveal">Det her bygger på <span class="it">tre ting.</span></h3>
+      <p class="proof-sub reveal">Ikke et koncept fra en bog eller en uddannelse — men tre ting Henrik har lært virker, fra eget arbejde og fra de mænd, der allerede har været igennem.</p>
+      <div class="principles reveal">
+        <div class="principle">
+          <div class="principle-num">i</div>
+          <div class="principle-title">Ærlighed før motivation.</div>
+          <p class="principle-body">Vi går ikke uden om det, der er svært. Det er der, det rigtige arbejde foregår — og det er sjældent et sted, vi finder alene.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">ii</div>
+          <div class="principle-title">Langsomhed før teknik.</div>
+          <p class="principle-body">Ingen bliver pushet ud i noget, de ikke er klar til. Du bestemmer selv tempoet. Det er ikke det hurtige, der flytter noget — det er det ægte.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">iii</div>
+          <div class="principle-title">Fællesskab før præstation.</div>
+          <p class="principle-body">Et rum af mænd, der tør være ærlige med hinanden, gør noget ved en, man ikke kan læse sig til. Det er det, de fleste fremhæver bagefter.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BENEFITS ============== -->
+<section class="benefits" id="benefits">
+  <div class="wrap">
+    <div class="benefits-head reveal">
+      <span class="eyebrow"><span class="dot"></span>Hvad du tager med hjem</span>
+      <h2>Byg dit fundament.</h2>
+    </div>
+
+    <div class="benefits-grid reveal">
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Indre ro</h3>
+        <p>Værktøjer til at slippe overtænkning og mærke kroppen igen — også når livet larmer udenpå.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18M5 10l7-7 7 7"/></svg>
+        </div>
+        <h3>Selvværd</h3>
+        <p>Du holder op med at måle din værdi i præstationer, og begynder at hvile i, hvem du er, når ingen kigger.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 21s-7-5-7-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-7 11-7 11z" fill="none"/></svg>
+        </div>
+        <h3>Følelseskontakt</h3>
+        <p>Lær at mærke det, du har holdt på afstand i årevis — sorg, vrede, længsel — uden at blive overvældet.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="10" r="3"/><circle cx="16" cy="10" r="3"/><path d="M3 20c1.5-3 4-4 5-4M21 20c-1.5-3-4-4-5-4"/></svg>
+        </div>
+        <h3>Stærkere relationer</h3>
+        <p>Vær til stede på en ny måde — med din partner, dine børn, dine venner. Som dig selv, ikke en rolle.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 21V11l8-7 8 7v10M9 21v-6h6v6"/></svg>
+        </div>
+        <h3>Mandlig identitet</h3>
+        <p>En måde at være mand på, der ikke kræver hårdhed eller hierarki — men hviler i ærlighed og ansvar.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20c1-4 4-5 5-5M22 20c-1-4-4-5-5-5M12 12v8"/></svg>
+        </div>
+        <h3>Brormaskab</h3>
+        <p>Et fællesskab af mænd, der har set dig — og som du kan ringe til, når der er brug for det.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== OM HENRIK ============== -->
+<section class="about" id="henrik">
+  <div class="wrap">
+    <div class="about-top reveal">
+      <h2>Hvem er <span class="it">Henrik?</span></h2>
+      <div class="about-copy">
+        <span class="eyebrow">Manden bag rummet</span>
+        <p class="lead">Henrik Alex Sørensen er mentor og workshopleder for mænd — uden alfa-retorik, uden falsk motivation, og uden et færdigt koncept fra en bog.</p>
+        <p>Hans arbejde er født ud af mange års eget arbejde med skam, overtænkning og det at have lært at præstere sig igennem livet. Det, han tilbyder, er det modsatte: et fortroligt rum, hvor mænd kan lægge facaden.</p>
+        <p>Han har faciliteret workshops, retreats og længere forløb for mænd siden 2019. Tilgangen er rolig, voksen og ærlig.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip reveal" aria-label="Billeder fra Henriks workshops">
+    <div class="strip-track">
+      <div class="strip-slide"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563180/d938eb50-0ee1-471e-92d1-4e43a64ba017_z2gtws.png" alt="Fra Henriks workshop" loading="lazy"></div>
+      <div class="strip-slide tall"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563169/cc864e41-cb26-4561-8962-1a4db3bd0d59_nmb3nk.png" alt="Fra Henriks workshop" loading="lazy"></div>
+      <div class="strip-slide"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779562889/Sk%C3%A6rmbillede_2026-05-23_204451_n0n3du.png" alt="Fra Henriks workshop" loading="lazy"></div>
+      <div class="strip-slide square"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779552545/ggg_ngzrwj.jpg" alt="Fra Henriks workshop" loading="lazy"></div>
+      <div class="strip-slide tall"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779463097/661176855_18575197846011770_4360949682931393459_n_kispdi.jpg" alt="Fra Henriks workshop" loading="lazy"></div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="strip-slide" aria-hidden="true"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563180/d938eb50-0ee1-471e-92d1-4e43a64ba017_z2gtws.png" alt="" loading="lazy"></div>
+      <div class="strip-slide tall" aria-hidden="true"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563169/cc864e41-cb26-4561-8962-1a4db3bd0d59_nmb3nk.png" alt="" loading="lazy"></div>
+      <div class="strip-slide" aria-hidden="true"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779562889/Sk%C3%A6rmbillede_2026-05-23_204451_n0n3du.png" alt="" loading="lazy"></div>
+      <div class="strip-slide square" aria-hidden="true"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779552545/ggg_ngzrwj.jpg" alt="" loading="lazy"></div>
+      <div class="strip-slide tall" aria-hidden="true"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779463097/661176855_18575197846011770_4360949682931393459_n_kispdi.jpg" alt="" loading="lazy"></div>
+    </div>
+  </div>
+
+  <img class="henrik-cutout" src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779562865/a560f74b-77f7-4a32-80d5-4acf9193627c-removebg-preview_kekjim.png" alt="Portræt af Henrik Alex Sørensen" loading="lazy">
+</section>
+
+<!-- ============== AGENDA ============== -->
+<section class="section" id="agenda">
+  <div class="wrap">
+    <div class="agenda reveal">
+      <div class="agenda-head">
+        <div>
+          <span class="eyebrow">Forløbet</span>
+          <h2 class="h-1" style="margin-top: 20px;">Tre dage, der <span class="it">flytter noget.</span></h2>
+        </div>
+        <p>Forløbet er bygget op som en rejse — fra at lægge det, du har båret rundt på, til at samle dig selv igen og finde et fodfæste, du kan tage med hjem og bygge videre på.</p>
+      </div>
+
+      <div class="timeline" id="timeline">
+        <div class="timeline-line" aria-hidden="true"></div>
+        <div class="timeline-dot" id="timeline-dot" aria-hidden="true"></div>
+
+        <div class="timeline-day active" data-side="left">
+          <div class="td-media"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779644808/2d1fc476-4030-4ed8-ae24-020212187ace__1_-removebg-preview_oxe6om.png" alt="Dag 1 — At lægge masken" loading="lazy"></div>
+          <div class="td-content">
+            <span class="td-num">Dag 01</span>
+            <h3 class="td-title">At lægge masken.</h3>
+            <p class="td-desc">Vi starter blødt. Du møder de andre mænd, og vi etablerer det rum, hvor alt det, du ikke plejer at sige højt, kan få lov at være. Første aften: dyb refleksion og fælles måltid.</p>
+            <div class="td-tags">
+              <span class="td-tag">Ankomst</span>
+              <span class="td-tag">Tryghed</span>
+              <span class="td-tag">Fællesskab</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-day" data-side="right">
+          <div class="td-media"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779644599/0c36abf2-9d39-4998-ab27-06c8a2094c5d-removebg-preview_rkopmm.png" alt="Dag 2 — Det vi har båret alene" loading="lazy"></div>
+          <div class="td-content">
+            <span class="td-num">Dag 02</span>
+            <h3 class="td-title">Det vi har båret alene.</h3>
+            <p class="td-desc">Dagen, hvor det rigtige arbejde foregår. Vi går ind i skammen, uroen, og det vi har skjult — gennem guidet gruppearbejde, kropslige øvelser og fortrolige samtaler i mindre grupper.</p>
+            <div class="td-tags">
+              <span class="td-tag">Følelser</span>
+              <span class="td-tag">Gennembrud</span>
+              <span class="td-tag">Krop</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-day" data-side="left">
+          <div class="td-media td-media--contain"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779694387/fba7db26-806e-43ab-bc53-fdac29e0af58.jfif_yxyxse.png" alt="Dag 3 — At bære det med hjem" loading="lazy"></div>
+          <div class="td-content">
+            <span class="td-num">Dag 03</span>
+            <h3 class="td-title">At bære det med hjem.</h3>
+            <p class="td-desc">Vi samler trådene. Du laver din personlige retning — konkrete, små skridt der gør, at det du har mærket her, ikke forsvinder, når du står i køkkenet søndag aften.</p>
+            <div class="td-tags">
+              <span class="td-tag">Integration</span>
+              <span class="td-tag">Retning</span>
+              <span class="td-tag">Brormaskab</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== STEMMER FRA MÆNDENE ============== -->
+<section class="quotes" id="stemmer">
+  <div class="wrap">
+    <div class="quotes-head reveal">
+      <span class="eyebrow plain">Stemmer fra mændene</span>
+      <h2 class="h-1">Det, deltagerne <span class="it">selv siger.</span></h2>
+    </div>
+
+    <div class="quotes-funnel">
+      <div class="qf-row r-3 reveal">
+        <article class="qf-card">
+          <header class="qf-head">
+            <div class="qf-avatar a-navy">M</div>
+            <div class="qf-id">
+              <span class="qf-name">Mikkel</span>
+              <span class="qf-meta">Workshop #1</span>
+            </div>
+          </header>
+          <p class="qf-quote">Jeg opnåede en ro/tilgivelse angående min skam omkring min behandling af mine børn. Mit selvbillede står bedre mentalt. Min energi er meget bedre i forhold til min ekskone og mine børn og den person, jeg gerne vil være overfor dem. Du skal gå ind i det her forløb, hvis du har brug for at få åbnet dine øjne overfor dine problemstillinger i livet.</p>
+        </article>
+
+        <article class="qf-card">
+          <header class="qf-head">
+            <div class="qf-avatar a-sand">C</div>
+            <div class="qf-id">
+              <span class="qf-name">Christoffer</span>
+              <span class="qf-meta">Workshop #1</span>
+            </div>
+          </header>
+          <p class="qf-quote">Jeg har fået mere ro omkring mit tankemylder og mine tanker til mig selv — at være den jeg er. Jeg har fået et større drive og mod på at ændre nogle ting for min egen skyld. Mit selvbillede har klart ændret sig til det mere positive. Jeg føler jeg er mere værd.</p>
+        </article>
+
+        <article class="qf-card">
+          <header class="qf-head">
+            <div class="qf-avatar a-brown">K</div>
+            <div class="qf-id">
+              <span class="qf-name">Kasper</span>
+              <span class="qf-meta">Workshop #1</span>
+            </div>
+          </header>
+          <p class="qf-quote">Især det med at slippe skammen var et kæmpe hit for mig — det er noget, der har tynget mig i årevis. Jeg ser nu mig selv som en velfungerende mand med muligheder, i stedet for en tøvende, bange gut der ikke fik ordnet det hele.</p>
+        </article>
+      </div>
+
+      <div class="qf-row r-2 reveal">
+        <article class="qf-card">
+          <header class="qf-head">
+            <div class="qf-avatar a-anon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.4-3.4 4.2-5 7-5s5.6 1.6 7 5"/></svg>
+            </div>
+            <div class="qf-id">
+              <span class="qf-name">Anonym deltager</span>
+              <span class="qf-meta">Workshop #1</span>
+            </div>
+          </header>
+          <p class="qf-quote">Weekenden har rykket grænser og jeg har fået et skub på min rejse i selvudvikling, givet en større ro i mig selv og tro på, at jeg kan hvad jeg vil. Vil helt klart anbefale det til alle, for der er ikke noget at miste ved at prøve.</p>
+        </article>
+
+        <article class="qf-card">
+          <header class="qf-head">
+            <div class="qf-avatar a-anon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.4-3.4 4.2-5 7-5s5.6 1.6 7 5"/></svg>
+            </div>
+            <div class="qf-id">
+              <span class="qf-name">Anonym deltager</span>
+              <span class="qf-meta">Workshop #1</span>
+            </div>
+          </header>
+          <p class="qf-quote">Jeg har gjort og følt ting, som jeg ikke troede var muligt. Jeg føler, jeg hviler mere i mig selv. Prøv det og gå ind i det med åbne arme. Det hjalp mig. Måske kan det også hjælpe dig.</p>
+        </article>
+      </div>
+
+      <div class="qf-row r-1 reveal">
+        <article class="qf-card">
+          <header class="qf-head">
+            <div class="qf-avatar a-anon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.4-3.4 4.2-5 7-5s5.6 1.6 7 5"/></svg>
+            </div>
+            <div class="qf-id">
+              <span class="qf-name">Anonym deltager</span>
+              <span class="qf-meta">Workshop #1</span>
+            </div>
+          </header>
+          <p class="qf-quote">Jeg har fået en større ro end forventet. Mere mod til at flytte mig som person — og nogle værktøjer til at være den bedste udgave af mig selv.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FINAL CTA ============== -->
+<section class="cta-split" id="tilmeld">
+  <div class="cta-photo reveal" role="img" aria-label="Henrik underviser på workshop"></div>
+  <div class="cta-block">
+    <div class="cta-inner reveal">
+      <span class="cta-eyebrow">Næste hold · sommer 2026</span>
+      <h2>Din vej hjem til <span class="it">dig selv</span> begynder her.</h2>
+      <p class="cta-sub">Pladser bliver tildelt efter en kort samtale, så vi sikrer os, at workshoppen er det rigtige for dig — og at du er det rigtige for holdet.</p>
+      <a href="mailto:henrik@hasworkshops.dk" class="btn">Book en samtale <span class="arrow"></span></a>
+      <div class="cta-meta">
+        <div>
+          <div class="cm-k">Dato</div>
+          <div class="cm-v">26.–28. juni 2026</div>
+        </div>
+        <div>
+          <div class="cm-k">Sted</div>
+          <div class="cm-v">Nordjylland</div>
+        </div>
+        <div>
+          <div class="cm-k">Pladser</div>
+          <div class="cm-v">Maks. 14 mænd</div>
+        </div>
+        <div>
+          <div class="cm-k">Inkluderet</div>
+          <div class="cm-v">Ophold &amp; alle måltider</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="section" id="faq" style="background: var(--cream-2);">
+  <div class="wrap">
+    <div class="faq-grid">
+      <aside class="faq-aside reveal">
+        <span class="eyebrow" style="margin-bottom: 24px; display: inline-flex;">Spørgsmål &amp; svar</span>
+        <h2 class="h-1" style="margin-bottom: 24px;">FAQ</h2>
+        <p>Skriver du mig en mail med et spørgsmål, der ikke står her, så svarer jeg som regel inden for et døgn.</p>
+        <a href="mailto:henrik@hasworkshops.dk" class="btn btn-ghost">Skriv til Henrik <span class="arrow"></span></a>
+      </aside>
+      <div class="faq-list reveal" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">Hvem er workshoppen for? <span class="icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Den er for mænd, typisk mellem 30 og 55, der mærker, at det er tid til at gå lidt ind i sig selv. Du behøver ikke have erfaring med personlig udvikling. Du behøver ikke vide, hvad det er, der trykker. Du skal bare være klar til at være ærlig — først og fremmest med dig selv.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Hvor mange deltagere er der? <span class="icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Vi holder grupperne små — mellem 10 og 14 mænd per workshop. Det er en bevidst beslutning. Det er størrelsen, der gør, at vi kan arbejde fortroligt og personligt med hver enkelt, og at fællesskabet kan blive ægte.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Hvad er inkluderet i prisen? <span class="icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Hele workshoppen, overnatning i tre dage, alle måltider, materialer og opfølgning. Du møder op fredag eftermiddag og kører hjem søndag sidst på dagen. Du skal kun selv have noget tøj med — og en notesbog, hvis du bruger en.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Skal jeg være god til at tale om følelser? <span class="icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Nej. De fleste, der kommer, har aldrig talt om det her med nogen. Det er hele pointen. Vi går langsomt, og du bestemmer selv tempoet. Ingen bliver pushet ud i noget, de ikke er klar til.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Hvor foregår det? <span class="icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">I et roligt sted i Aalborg-området — vi bruger en gård med plads til både samling og at gå alene en tur. Du får den præcise adresse og praktisk info, når du har tilmeldt dig.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Er det terapi? <span class="icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Nej. Det er en transformerende workshop — ikke en behandling. Hvis du går med en aktuel psykisk lidelse, er det her ikke det rigtige sted, og jeg vil typisk henvise dig videre. Skriv endelig, hvis du er i tvivl.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Hvad sker der efter de tre dage? <span class="icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Du bliver en del af et lukket fællesskab med tidligere deltagere, og vi mødes online en gang om måneden i seks måneder efter. Det er der, det meste af det rigtige arbejde foregår — efter weekenden, i hverdagen.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Hvad hvis jeg ikke kan på datoen? <span class="icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Vi kører workshoppen to gange om året — forår og efterår. Skriv dig op til ventelisten, så hører du som de første, når næste hold åbner for tilmelding.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== KALENDER ============== -->
+<section class="calendar" id="kalender">
+  <div class="wrap">
+    <div class="calendar-head reveal">
+      <div>
+        <span class="eyebrow">Kalender</span>
+        <h2 class="h-1" style="margin-top: 20px;">Kommende &amp; <span class="it">tidligere hold.</span></h2>
+      </div>
+      <p>To gange om året — forår og efterår. Vi holder grupperne små, og pladserne går typisk inden for få uger. Skriv dig på ventelisten, når et hold er udsolgt.</p>
+    </div>
+
+    <div class="cal-grid reveal">
+      <!-- Workshop #2 — Sommer 2026 (Åben tilmelding) -->
+      <article class="cal-card">
+        <span class="cal-ribbon open">Tilmelding åben</span>
+        <div class="cal-card-head">
+          <div>
+            <div class="cal-month">Juni</div>
+            <div class="cal-days">26<span class="sep">–</span>28</div>
+          </div>
+          <span class="cal-year">2026</span>
+        </div>
+        <div class="cal-banner">
+          <div class="cal-banner-title">Workshop #2</div>
+        </div>
+        <div class="cal-body">
+          <h3 class="cal-title">Workshop — Sommer 2026</h3>
+          <div class="cal-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span>Nordjylland</span>
+            <span class="cal-loc-extra">Maks. 14 mænd</span>
+          </div>
+          <a href="#tilmeld" class="cal-btn">Book samtale</a>
+        </div>
+      </article>
+
+      <!-- Workshop #1 — Forår 2026 (Udsolgt) -->
+      <article class="cal-card">
+        <span class="cal-ribbon sold">Udsolgt</span>
+        <div class="cal-card-head">
+          <div>
+            <div class="cal-month">Marts</div>
+            <div class="cal-days">27<span class="sep">–</span>29</div>
+          </div>
+          <span class="cal-year">2026</span>
+        </div>
+        <div class="cal-banner cal-banner--photo">
+          <img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779715104/Sebber-Kloster-pvtf7421we4taj3pr2cpctfrzuqnpyppedzed0j12w_lzk0q4.jpg" alt="Sebber Kloster" loading="lazy">
+          <div class="cal-banner-title">Workshop #1</div>
+        </div>
+        <div class="cal-body">
+          <h3 class="cal-title">Workshop — Forår 2026</h3>
+          <div class="cal-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span>Sebber Kloster · 9240 Nibe</span>
+            <span class="cal-loc-extra">14 deltagere</span>
+          </div>
+          <span class="cal-btn muted">Afholdt</span>
+        </div>
+      </article>
+
+      <!-- Workshop Efterår 2025 (Afholdt) -->
+      <article class="cal-card">
+        <span class="cal-ribbon sold">Afholdt</span>
+        <div class="cal-card-head">
+          <div>
+            <div class="cal-month">Oktober</div>
+            <div class="cal-days">—</div>
+          </div>
+          <span class="cal-year">2025</span>
+        </div>
+        <div class="cal-banner">
+          <div class="cal-banner-title">Workshop #0</div>
+        </div>
+        <div class="cal-body">
+          <h3 class="cal-title">Workshop — Efterår 2025</h3>
+          <div class="cal-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span>Aalborg-området</span>
+            <span class="cal-loc-extra">12 deltagere</span>
+          </div>
+          <span class="cal-btn muted">Afholdt</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BLOG ============== -->
+<section class="blog" id="blog">
+  <div class="wrap">
+    <div class="blog-head reveal">
+      <div class="blog-head-left">
+        <h2>Blog</h2>
+        <a href="#blog" class="blog-explore">Udforsk bloggen</a>
+      </div>
+      <div class="blog-nav" aria-label="Blædr i blogindlæg">
+        <button type="button" class="blog-prev" aria-label="Forrige">&#8249;</button>
+        <button type="button" class="blog-next" aria-label="Næste">&#8250;</button>
+      </div>
+    </div>
+
+    <div class="blog-scroller reveal" id="blog-scroller">
+      <a href="#" class="blog-card">
+        <div class="blog-card-media ph" data-label="Foto kommer"></div>
+        <span class="blog-card-tag">Relationer</span>
+        <h3 class="blog-card-title">Når masken bliver tungere end ansigtet</h3>
+        <p class="blog-card-excerpt">Vi lærer tidligt at klare os selv. Men der kommer et punkt, hvor det, vi bærer alene, begynder at koste mere end det giver.</p>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-media ph" data-label="Foto kommer"></div>
+        <span class="blog-card-tag">Sorg</span>
+        <h3 class="blog-card-title">At sidde med det, der ikke kan fikses</h3>
+        <p class="blog-card-excerpt">Nogle ting skal ikke løses — de skal mødes. Om kunsten at være hos sig selv, når livet ikke kan rettes op.</p>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-media ph" data-label="Foto kommer"></div>
+        <span class="blog-card-tag">Parforhold</span>
+        <h3 class="blog-card-title">Den samtale I begge har gået udenom</h3>
+        <p class="blog-card-excerpt">Der findes en sætning i de fleste parforhold, som ingen tager først. Om hvorfor det ofte er der, nærheden begynder igen.</p>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-media ph" data-label="Foto kommer"></div>
+        <span class="blog-card-tag">Indre arbejde</span>
+        <h3 class="blog-card-title">Hvad kroppen husker, når hovedet har glemt</h3>
+        <p class="blog-card-excerpt">Mange af de mønstre, vi gentager som voksne, ligger gemt i kroppen før de når tanken. Om at lytte indad.</p>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-media ph" data-label="Foto kommer"></div>
+        <span class="blog-card-tag">Mænd</span>
+        <h3 class="blog-card-title">Når mænd endelig lægger rüstningen</h3>
+        <p class="blog-card-excerpt">Det er sjældent dramatisk. Det er stille. Men det der sker, når en mand for første gang siger det højt, ændrer ham.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-mark">H</span>
+          <span>Henrik Alex Sørensen</span>
+        </div>
+        <p>Workshops, mentorforløb og fællesskaber for mænd, der vil leve mere ærligt — uden masker, uden alfa-kultur, uden krav om at have det hele på plads.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Arbejdet</h4>
+        <ul>
+          <li><a href="#workshop">3-dages workshop</a></li>
+          <li><a href="#">Mentorforløb</a></li>
+          <li><a href="#">Online fællesskab</a></li>
+          <li><a href="#">Foredrag</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Læs</h4>
+        <ul>
+          <li><a href="#henrik">Om Henrik</a></li>
+          <li><a href="#stemmer">Stemmer</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#kalender">Datoer</a></li>
+          <li><a href="#">Skriverier</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:henrik@hasworkshops.dk">henrik@hasworkshops.dk</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Nyhedsbrev</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Henrik Alex Sørensen · Aalborg, DK</span>
+      <span>Lavet med omtanke</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sticky nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 24);
+}, { passive: true });
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o => {
+      if (o !== item) { o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = '0px'; }
+    });
+    if (open) {
+      item.classList.remove('open');
+      item.querySelector('.faq-a').style.maxHeight = '0px';
+    } else {
+      item.classList.add('open');
+      const a = item.querySelector('.faq-a');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+// Timeline scroll-following dot + active day
+(function() {
+  const timeline = document.getElementById('timeline');
+  if (!timeline) return;
+  const dot = document.getElementById('timeline-dot');
+  const days = Array.from(timeline.querySelectorAll('.timeline-day'));
+
+  function tick() {
+    const rect = timeline.getBoundingClientRect();
+    const center = window.innerHeight * 0.5;
+    let progress = (center - rect.top) / rect.height;
+    progress = Math.max(0, Math.min(1, progress));
+    dot.style.top = (progress * 100) + '%';
+
+    let activeIdx = 0, minDist = Infinity;
+    days.forEach((d, i) => {
+      const r = d.getBoundingClientRect();
+      const dist = Math.abs((r.top + r.height / 2) - center);
+      if (dist < minDist) { minDist = dist; activeIdx = i; }
+    });
+    days.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+  }
+
+  let rafId = null;
+  function onScroll() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => { rafId = null; tick(); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  tick();
+})();
+
+// Blog horizontal scroller
+(function() {
+  const scroller = document.getElementById('blog-scroller');
+  if (!scroller) return;
+  const prev = document.querySelector('.blog-prev');
+  const next = document.querySelector('.blog-next');
+
+  function step() {
+    const first = scroller.querySelector('.blog-card');
+    if (!first) return 400;
+    return first.getBoundingClientRect().width + 24;
+  }
+  function update() {
+    const max = scroller.scrollWidth - scroller.clientWidth - 2;
+    prev.disabled = scroller.scrollLeft <= 2;
+    next.disabled = scroller.scrollLeft >= max;
+  }
+  prev.addEventListener('click', () => scroller.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => scroller.scrollBy({ left: step(), behavior: 'smooth' }));
+  scroller.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+
+</body>
+</html>
