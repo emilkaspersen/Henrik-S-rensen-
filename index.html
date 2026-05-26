@@ -223,15 +223,19 @@ h1, h2, h3, h4 {
 }
 .nav-links a:hover { background: rgba(28, 43, 74, 0.06); color: var(--navy); }
 .nav-cta {
-  background: var(--navy);
-  color: var(--cream);
-  padding: 11px 20px;
+  background: transparent;
+  color: var(--navy);
+  padding: 10px 20px;
   border-radius: 999px;
+  border: 1.5px solid rgba(28, 43, 74, 0.35);
   font-size: 14px;
   font-weight: 500;
-  transition: background .2s ease;
+  transition: background .2s ease, border-color .2s ease;
 }
-.nav-cta:hover { background: var(--navy-2); }
+.nav-cta:hover {
+  background: rgba(28, 43, 74, 0.06);
+  border-color: var(--navy);
+}
 
 .menu-toggle { display: none; }
 
@@ -330,9 +334,11 @@ h1, h2, h3, h4 {
 .hero-sub {
   margin-top: 16px;
   font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 500;
   line-height: 1.55;
-  color: rgba(245, 240, 232, 0.85);
+  color: rgba(245, 240, 232, 0.92);
   max-width: 48ch;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.55);
 }
 
 .hero-bottom {
@@ -349,7 +355,7 @@ h1, h2, h3, h4 {
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
-  padding-right: 40px;
+  padding-right: 56px;
   margin-right: 8px;
 }
 
@@ -1793,7 +1799,7 @@ h1, h2, h3, h4 {
         Du er omgivet af folk.<br><span class="softer">Og alligevel er der ting, du aldrig har sagt højt til nogen.</span>
       </h1>
 
-      <p class="hero-sub reveal">En tre-dages workshop i Nordjylland for mænd, der er klar til at gøre noget ved det.</p>
+      <p class="hero-sub reveal">En tre-dages workshop for mænd, der er klar til at gøre noget ved det.</p>
     </div>
 
     <div class="hero-bottom reveal">
@@ -1807,7 +1813,7 @@ h1, h2, h3, h4 {
         </div>
         <div>
           <div class="k">Sted</div>
-          <div class="v">Nordjylland</div>
+          <div class="v">Sebber Kloster</div>
         </div>
         <div>
           <div class="k">Pladser</div>
