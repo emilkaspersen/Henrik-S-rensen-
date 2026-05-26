@@ -2369,11 +2369,7 @@ h1, h2, h3, h4 {
 </footer>
 
 <script>
-// Sticky nav — transparent at top, cream bg after 50px
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
+// Nav stays transparent throughout
 
 // Reveal on scroll
 const io = new IntersectionObserver((entries) => {
