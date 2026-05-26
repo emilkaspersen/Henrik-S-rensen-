@@ -155,7 +155,7 @@ h1, h2, h3, h4 {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 50;
-  padding: 18px 28px;
+  padding: 10px 28px;
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -168,45 +168,57 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 18px 14px 24px;
+  padding: 6px 10px 6px 16px;
   border-radius: 999px;
-  background: rgba(245, 240, 232, 0.72);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid rgba(28, 43, 74, 0.08);
-  transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
 }
 .nav.scrolled .nav-inner {
-  background: rgba(245, 240, 232, 0.92);
+  background: rgba(245, 240, 232, 0.94);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border-color: rgba(28, 43, 74, 0.08);
   box-shadow: 0 8px 32px -16px rgba(28, 43, 74, 0.18);
 }
+
+/* Brand / logo */
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
   font-family: var(--serif);
   font-size: 22px;
-  color: var(--navy);
+  color: var(--cream);
   letter-spacing: -0.01em;
+  transition: color .35s ease;
 }
+.nav.scrolled .brand { color: var(--navy); }
 .brand-logo {
-  height: 64px;
-  width: 64px;
+  height: 56px;
+  width: 56px;
   display: block;
   object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: filter .35s ease;
 }
+.nav.scrolled .brand-logo { filter: none; }
 .brand-mark {
   width: 28px; height: 28px;
   border-radius: 50%;
-  background: var(--navy);
+  background: var(--cream);
   display: grid; place-items: center;
-  color: var(--cream);
+  color: var(--navy);
   font-family: var(--serif);
   font-style: italic;
   font-size: 16px;
   line-height: 1;
   padding-bottom: 2px;
+  transition: background .35s ease, color .35s ease;
 }
+.nav.scrolled .brand-mark { background: var(--navy); color: var(--cream); }
+
+/* Nav links */
 .nav-links {
   display: flex;
   gap: 4px;
@@ -216,26 +228,29 @@ h1, h2, h3, h4 {
 }
 .nav-links a {
   display: inline-block;
-  padding: 10px 14px;
+  padding: 8px 14px;
   border-radius: 999px;
-  color: var(--brown);
+  color: rgba(245, 240, 232, 0.9);
   transition: background .2s ease, color .2s ease;
 }
-.nav-links a:hover { background: rgba(28, 43, 74, 0.06); color: var(--navy); }
+.nav-links a:hover { background: rgba(245, 240, 232, 0.14); color: var(--cream); }
+.nav.scrolled .nav-links a { color: var(--brown); }
+.nav.scrolled .nav-links a:hover { background: rgba(28, 43, 74, 0.06); color: var(--navy); }
+
+/* CTA button */
 .nav-cta {
   background: transparent;
-  color: var(--navy);
-  padding: 10px 20px;
+  color: var(--cream);
+  padding: 8px 18px;
   border-radius: 999px;
-  border: 1.5px solid rgba(28, 43, 74, 0.35);
+  border: 1px solid rgba(245, 240, 232, 0.65);
   font-size: 14px;
   font-weight: 500;
-  transition: background .2s ease, border-color .2s ease;
+  transition: background .2s ease, border-color .2s ease, color .35s ease;
 }
-.nav-cta:hover {
-  background: rgba(28, 43, 74, 0.06);
-  border-color: var(--navy);
-}
+.nav-cta:hover { background: rgba(245, 240, 232, 0.12); border-color: var(--cream); }
+.nav.scrolled .nav-cta { color: var(--navy); border-color: rgba(28, 43, 74, 0.35); }
+.nav.scrolled .nav-cta:hover { background: rgba(28, 43, 74, 0.06); border-color: var(--navy); }
 
 .menu-toggle { display: none; }
 
@@ -2354,10 +2369,10 @@ h1, h2, h3, h4 {
 </footer>
 
 <script>
-// Sticky nav
+// Sticky nav — transparent at top, cream bg after 50px
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 24);
+  nav.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
 // Reveal on scroll
