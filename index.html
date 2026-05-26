@@ -83,9 +83,9 @@ h1, h2, h3, h4 {
   line-height: 1.02;
 }
 .h-display {
-  font-size: clamp(38px, 5vw, 72px);
+  font-size: clamp(32px, 3.8vw, 58px);
   letter-spacing: -0.025em;
-  line-height: 1.05;
+  line-height: 1.08;
   text-wrap: balance;
 }
 .h-1 { font-size: clamp(40px, 5.8vw, 78px); line-height: 1.02; }
@@ -259,15 +259,15 @@ h1, h2, h3, h4 {
 /* ---------- Hero (full-bleed image) ---------- */
 .hero {
   position: relative;
-  min-height: 100vh;
-  height: 860px;
-  max-height: 1000px;
+  height: 100vh;
+  min-height: 640px;
+  max-height: 960px;
   overflow: hidden;
   color: var(--cream);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 120px 0 56px;
+  padding: 80px 0 48px;
   background: #000;
 }
 .hero-bg {
@@ -307,7 +307,7 @@ h1, h2, h3, h4 {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 28px;
+  margin-bottom: 18px;
 }
 .hero-eyebrow::before {
   content: "";
@@ -328,8 +328,8 @@ h1, h2, h3, h4 {
   font-style: italic;
 }
 .hero-sub {
-  margin-top: 28px;
-  font-size: clamp(17px, 1.4vw, 19px);
+  margin-top: 16px;
+  font-size: clamp(15px, 1.2vw, 17px);
   line-height: 1.55;
   color: rgba(245, 240, 232, 0.85);
   max-width: 48ch;
@@ -340,8 +340,8 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
   align-items: center;
   gap: 0;
-  margin-top: 56px;
-  padding-top: 32px;
+  margin-top: 32px;
+  padding-top: 24px;
   border-top: 1px solid rgba(245, 240, 232, 0.18);
 }
 .hero-cta {
