@@ -3,10 +3,33 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Henrik Alex Sørensen — Hjem til dig selv · 3-dages workshop</title>
+<title>Henrik Alex Sørensen — Hjem til dig selv · 3-dages workshop for mænd</title>
+<meta name="description" content="En tre-dages workshop i Nordjylland for mænd, der er klar til at gøre noget ved det. Næste hold: 26.–28. juni 2026 på Sebber Kloster." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://henriksorensen.dk/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Henrik Alex Sørensen — Hjem til dig selv" />
+<meta property="og:description" content="En tre-dages workshop for mænd, der er klar til at gøre noget ved det. Næste hold: 26.–28. juni 2026." />
+<meta property="og:image" content="https://res.cloudinary.com/dssjlvoft/image/upload/v1777226055/kling_20260427_%E4%BD%9C%E5%93%81_Image1fjer_445_1_vku2me.png" />
+<meta property="og:locale" content="da_DK" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Henrik Alex Sørensen — Hjem til dig selv" />
+<meta name="twitter:description" content="En tre-dages workshop for mænd, der er klar til at gøre noget ved det." />
+<meta name="twitter:image" content="https://res.cloudinary.com/dssjlvoft/image/upload/v1777226055/kling_20260427_%E4%BD%9C%E5%93%81_Image1fjer_445_1_vku2me.png" />
+
+<!-- Third-party connections -->
+<link rel="dns-prefetch" href="https://res.cloudinary.com" />
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- LCP image preload -->
+<link rel="preload" as="image" href="https://res.cloudinary.com/dssjlvoft/image/upload/v1777226055/kling_20260427_%E4%BD%9C%E5%93%81_Image1fjer_445_1_vku2me.png" fetchpriority="high" />
+
+<!-- Fonts (weight 300 removed — unused) -->
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 :root {
   --cream: #F5F0E8;
@@ -29,7 +52,9 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 
 body {
   background: var(--cream);
@@ -39,9 +64,16 @@ body {
   font-size: 17px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
+
+/* Keyboard focus ring — visible only for keyboard nav */
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+:focus:not(:focus-visible) { outline: none; }
 
 img { display: block; max-width: 100%; }
 
@@ -143,12 +175,6 @@ h1, h2, h3, h4 {
   border-color: var(--line-strong);
 }
 .btn-ghost:hover { border-color: var(--navy); background: rgba(28, 43, 74, 0.04); }
-
-.btn-light {
-  background: var(--cream);
-  color: var(--navy);
-}
-.btn-light:hover { background: var(--cream-2); }
 
 /* ---------- Nav ---------- */
 .nav {
@@ -260,19 +286,67 @@ h1, h2, h3, h4 {
     display: grid; place-items: center;
     width: 42px; height: 42px;
     border-radius: 50%;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(245, 240, 232, 0.5);
     background: transparent;
     cursor: pointer;
+    position: relative;
+    z-index: 51;
   }
   .menu-toggle span {
-    display: block; width: 18px; height: 1.5px; background: var(--navy);
-    position: relative;
+    display: block; width: 18px; height: 1.5px; background: var(--cream);
+    position: relative; transition: background .3s ease;
   }
   .menu-toggle span::before, .menu-toggle span::after {
-    content: ""; position: absolute; left: 0; width: 18px; height: 1.5px; background: var(--navy);
+    content: ""; position: absolute; left: 0; width: 18px; height: 1.5px; background: var(--cream);
+    transition: transform .3s ease, top .3s ease, background .3s ease;
   }
   .menu-toggle span::before { top: -6px; }
   .menu-toggle span::after { top: 6px; }
+
+  /* Open state — hamburger becomes X */
+  .nav.menu-open .menu-toggle span { background: transparent; }
+  .nav.menu-open .menu-toggle span::before { top: 0; transform: rotate(45deg); background: var(--navy); }
+  .nav.menu-open .menu-toggle span::after  { top: 0; transform: rotate(-45deg); background: var(--navy); }
+  .nav.menu-open .menu-toggle { border-color: var(--line); }
+
+  /* Full-screen menu overlay */
+  .nav.menu-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: fixed;
+    inset: 0;
+    background: rgba(245, 240, 232, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 49;
+    padding: 80px 28px 48px;
+  }
+  .nav.menu-open .nav-links a {
+    font-family: var(--serif);
+    font-size: clamp(28px, 8vw, 40px);
+    color: var(--navy);
+    padding: 14px 28px;
+    border-radius: 12px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: background .2s ease;
+  }
+  .nav.menu-open .nav-links a:hover { background: rgba(28, 43, 74, 0.06); }
+  .nav.menu-open .nav-cta {
+    display: inline-flex;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 51;
+    color: var(--navy);
+    border-color: rgba(28, 43, 74, 0.35);
+    white-space: nowrap;
+  }
 }
 
 /* ---------- Hero (full-bleed image) ---------- */
@@ -724,7 +798,7 @@ h1, h2, h3, h4 {
   color: var(--cream);
 }
 .benefit-icon svg { width: 18px; height: 18px; stroke-width: 1.5; }
-.benefit-num { display: none; }
+
 .benefit h3 {
   font-family: var(--sans);
   font-size: 19px;
@@ -1330,9 +1404,8 @@ h1, h2, h3, h4 {
 .cal-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  max-width: 820px;
   gap: 28px;
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto;
 }
 .cal-card {
@@ -1776,16 +1849,86 @@ h1, h2, h3, h4 {
   .hero { padding-top: 110px; }
 }
 </style>
+
+<!-- Structured data: Event -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Hjem til dig selv — 3-dages workshop for mænd",
+  "description": "En tre-dages workshop for mænd, der er klar til at gøre noget ved det. Fysisk tilstedeværelse, maks. 14 deltagere.",
+  "startDate": "2026-06-26",
+  "endDate": "2026-06-28",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "location": {
+    "@type": "Place",
+    "name": "Sebber Kloster",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Nibe",
+      "postalCode": "9240",
+      "addressCountry": "DK"
+    }
+  },
+  "organizer": {
+    "@type": "Person",
+    "name": "Henrik Alex Sørensen",
+    "email": "henrik@hasworkshops.dk"
+  },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "url": "https://henriksorensen.dk/#tilmeld"
+  }
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     ANALYTICS — replace placeholder IDs before going live
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- Google Analytics 4
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+
+<!-- Meta Pixel
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'XXXXXXXXXXXXXXXXXX');
+  fbq('track', 'PageView');
+</script>
+-->
+
+<!-- Microsoft Clarity
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script","XXXXXXXXXX");
+</script>
+-->
+
 </head>
 <body>
 
 <!-- ============== NAV ============== -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label="Primær navigation">
   <div class="nav-inner">
     <a href="#top" class="brand" aria-label="Henrik Alex Sørensen — forside">
-      <img class="brand-logo" src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779788138/download-removebg-preview_x7rfiq.png" alt="Henrik Alex Sørensen">
+      <img class="brand-logo" src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779788138/download-removebg-preview_x7rfiq.png" alt="Henrik Alex Sørensen" width="56" height="56" fetchpriority="high">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="#workshop">Workshop</a></li>
       <li><a href="#agenda">Forløb</a></li>
       <li><a href="#stemmer">Stemmer</a></li>
@@ -1794,7 +1937,7 @@ h1, h2, h3, h4 {
       <li><a href="#kalender">Datoer</a></li>
     </ul>
     <a href="#tilmeld" class="nav-cta">Tilmeld dig</a>
-    <button class="menu-toggle" aria-label="Menu"><span></span></button>
+    <button type="button" class="menu-toggle" aria-label="Åbn menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
   </div>
 </nav>
 
@@ -2168,36 +2311,36 @@ h1, h2, h3, h4 {
       </aside>
       <div class="faq-list reveal" id="faq-list">
         <div class="faq-item">
-          <button class="faq-q">Hvem er workshoppen for? <span class="icon"></span></button>
-          <div class="faq-a"><div class="faq-a-inner">Den er for mænd, typisk mellem 30 og 55, der mærker, at det er tid til at gå lidt ind i sig selv. Du behøver ikke have erfaring med personlig udvikling. Du behøver ikke vide, hvad det er, der trykker. Du skal bare være klar til at være ærlig — først og fremmest med dig selv.</div></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-1">Hvem er workshoppen for? <span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-a" id="faq-a-1" role="region"><div class="faq-a-inner">Den er for mænd, typisk mellem 30 og 55, der mærker, at det er tid til at gå lidt ind i sig selv. Du behøver ikke have erfaring med personlig udvikling. Du behøver ikke vide, hvad det er, der trykker. Du skal bare være klar til at være ærlig — først og fremmest med dig selv.</div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Hvor mange deltagere er der? <span class="icon"></span></button>
-          <div class="faq-a"><div class="faq-a-inner">Vi holder grupperne små — mellem 10 og 14 mænd per workshop. Det er en bevidst beslutning. Det er størrelsen, der gør, at vi kan arbejde fortroligt og personligt med hver enkelt, og at fællesskabet kan blive ægte.</div></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-2">Hvor mange deltagere er der? <span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-a" id="faq-a-2" role="region"><div class="faq-a-inner">Vi holder grupperne små — mellem 10 og 14 mænd per workshop. Det er en bevidst beslutning. Det er størrelsen, der gør, at vi kan arbejde fortroligt og personligt med hver enkelt, og at fællesskabet kan blive ægte.</div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Hvad er inkluderet i prisen? <span class="icon"></span></button>
-          <div class="faq-a"><div class="faq-a-inner">Hele workshoppen, overnatning i tre dage, alle måltider, materialer og opfølgning. Du møder op fredag eftermiddag og kører hjem søndag sidst på dagen. Du skal kun selv have noget tøj med — og en notesbog, hvis du bruger en.</div></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-3">Hvad er inkluderet i prisen? <span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-a" id="faq-a-3" role="region"><div class="faq-a-inner">Hele workshoppen, overnatning i tre dage, alle måltider, materialer og opfølgning. Du møder op fredag eftermiddag og kører hjem søndag sidst på dagen. Du skal kun selv have noget tøj med — og en notesbog, hvis du bruger en.</div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Skal jeg være god til at tale om følelser? <span class="icon"></span></button>
-          <div class="faq-a"><div class="faq-a-inner">Nej. De fleste, der kommer, har aldrig talt om det her med nogen. Det er hele pointen. Vi går langsomt, og du bestemmer selv tempoet. Ingen bliver pushet ud i noget, de ikke er klar til.</div></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-4">Skal jeg være god til at tale om følelser? <span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-a" id="faq-a-4" role="region"><div class="faq-a-inner">Nej. De fleste, der kommer, har aldrig talt om det her med nogen. Det er hele pointen. Vi går langsomt, og du bestemmer selv tempoet. Ingen bliver pushet ud i noget, de ikke er klar til.</div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Hvor foregår det? <span class="icon"></span></button>
-          <div class="faq-a"><div class="faq-a-inner">I et roligt sted i Aalborg-området — vi bruger en gård med plads til både samling og at gå alene en tur. Du får den præcise adresse og praktisk info, når du har tilmeldt dig.</div></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-5">Hvor foregår det? <span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-a" id="faq-a-5" role="region"><div class="faq-a-inner">I et roligt sted i Aalborg-området — vi bruger en gård med plads til både samling og at gå alene en tur. Du får den præcise adresse og praktisk info, når du har tilmeldt dig.</div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Er det terapi? <span class="icon"></span></button>
-          <div class="faq-a"><div class="faq-a-inner">Nej. Det er en transformerende workshop — ikke en behandling. Hvis du går med en aktuel psykisk lidelse, er det her ikke det rigtige sted, og jeg vil typisk henvise dig videre. Skriv endelig, hvis du er i tvivl.</div></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-6">Er det terapi? <span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-a" id="faq-a-6" role="region"><div class="faq-a-inner">Nej. Det er en transformerende workshop — ikke en behandling. Hvis du går med en aktuel psykisk lidelse, er det her ikke det rigtige sted, og jeg vil typisk henvise dig videre. Skriv endelig, hvis du er i tvivl.</div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Hvad sker der efter de tre dage? <span class="icon"></span></button>
-          <div class="faq-a"><div class="faq-a-inner">Du bliver en del af et lukket fællesskab med tidligere deltagere, og vi mødes online en gang om måneden i seks måneder efter. Det er der, det meste af det rigtige arbejde foregår — efter weekenden, i hverdagen.</div></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-7">Hvad sker der efter de tre dage? <span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-a" id="faq-a-7" role="region"><div class="faq-a-inner">Du bliver en del af et lukket fællesskab med tidligere deltagere, og vi mødes online en gang om måneden i seks måneder efter. Det er der, det meste af det rigtige arbejde foregår — efter weekenden, i hverdagen.</div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Hvad hvis jeg ikke kan på datoen? <span class="icon"></span></button>
-          <div class="faq-a"><div class="faq-a-inner">Vi kører workshoppen to gange om året — forår og efterår. Skriv dig op til ventelisten, så hører du som de første, når næste hold åbner for tilmelding.</div></div>
+          <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-8">Hvad hvis jeg ikke kan på datoen? <span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-a" id="faq-a-8" role="region"><div class="faq-a-inner">Vi kører workshoppen to gange om året — forår og efterår. Skriv dig op til ventelisten, så hører du som de første, når næste hold åbner for tilmelding.</div></div>
         </div>
       </div>
     </div>
@@ -2369,7 +2512,26 @@ h1, h2, h3, h4 {
 </footer>
 
 <script>
-// Nav stays transparent throughout
+// Mobile menu
+(function() {
+  const nav = document.getElementById('nav');
+  const toggle = nav.querySelector('.menu-toggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Luk menu' : 'Åbn menu');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  nav.querySelectorAll('.nav-links a, .nav-cta').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Åbn menu');
+      document.body.style.overflow = '';
+    });
+  });
+})();
 
 // Reveal on scroll
 const io = new IntersectionObserver((entries) => {
@@ -2385,15 +2547,21 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     const item = btn.parentElement;
     const open = item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(o => {
-      if (o !== item) { o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = '0px'; }
+      if (o !== item) {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = '0px';
+        o.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      }
     });
     if (open) {
       item.classList.remove('open');
       item.querySelector('.faq-a').style.maxHeight = '0px';
+      btn.setAttribute('aria-expanded', 'false');
     } else {
       item.classList.add('open');
       const a = item.querySelector('.faq-a');
       a.style.maxHeight = a.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
     }
   });
 });
@@ -2430,6 +2598,9 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   window.addEventListener('resize', onScroll);
   tick();
 })();
+
+// Async decode for all lazy-loaded images (reduces main-thread decode pressure)
+document.querySelectorAll('img[loading="lazy"]').forEach(img => { img.decoding = 'async'; });
 
 // Blog horizontal scroller
 (function() {
