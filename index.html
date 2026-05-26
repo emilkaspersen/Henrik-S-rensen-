@@ -296,6 +296,8 @@ h1, h2, h3, h4 {
 }
 .hero-inner { position: relative; z-index: 3; }
 
+.hero-text { max-width: 600px; }
+
 .hero-eyebrow {
   font-family: var(--mono);
   font-size: 12px;
@@ -337,27 +339,40 @@ h1, h2, h3, h4 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 48px;
-  margin-top: 64px;
+  gap: 0;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(245, 240, 232, 0.18);
 }
-.hero-cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-right: 40px;
+  margin-right: 8px;
+}
 
 .hero-meta-row {
   display: flex;
-  gap: 56px;
   flex-wrap: wrap;
+  gap: 0;
+}
+.hero-meta-row > div {
+  padding: 0 32px;
+  border-left: 1px solid rgba(245, 240, 232, 0.22);
 }
 .hero-meta-row .k {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(245, 240, 232, 0.6);
-  margin-bottom: 8px;
+  color: rgba(245, 240, 232, 0.55);
+  margin-bottom: 6px;
 }
 .hero-meta-row .v {
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: 20px;
   color: var(--cream);
   line-height: 1.1;
   letter-spacing: -0.005em;
@@ -1709,9 +1724,11 @@ h1, h2, h3, h4 {
     background:
       linear-gradient(180deg, rgba(20, 28, 48, 0.55) 0%, rgba(20, 28, 48, 0.35) 40%, rgba(20, 28, 48, 0.75) 100%);
   }
-  .hero-bottom { gap: 28px; margin-top: 40px; }
-  .hero-meta-row { gap: 28px; }
-  .hero-meta-row .v { font-size: 18px; }
+  .hero-bottom { gap: 0; margin-top: 32px; padding-top: 24px; }
+  .hero-cta { padding-right: 0; margin-right: 0; border-right: none; width: 100%; padding-bottom: 24px; border-bottom: 1px solid rgba(245,240,232,0.18); }
+  .hero-meta-row { gap: 0; }
+  .hero-meta-row > div { padding: 16px 20px 0 0; border-left: none; }
+  .hero-meta-row .v { font-size: 17px; }
 }
 @media (max-width: 980px) {
   .section-head, .agenda-head, .faq-grid {
@@ -1767,15 +1784,17 @@ h1, h2, h3, h4 {
   <div class="hero-grain"></div>
 
   <div class="wrap hero-inner">
-    <div class="reveal">
-      <span class="hero-eyebrow">Fysisk · 3-dages workshop · Nordjylland</span>
+    <div class="hero-text">
+      <div class="reveal">
+        <span class="hero-eyebrow">Fysisk · 3-dages workshop · Nordjylland</span>
+      </div>
+
+      <h1 class="h-display reveal">
+        Du er omgivet af folk.<br><span class="softer">Og alligevel er der ting, du aldrig har sagt højt til nogen.</span>
+      </h1>
+
+      <p class="hero-sub reveal">En tre-dages workshop i Nordjylland for mænd, der er klar til at gøre noget ved det.</p>
     </div>
-
-    <h1 class="h-display reveal">
-      Du er omgivet af folk.<br><span class="softer">Og alligevel er der ting, du aldrig har sagt højt til nogen.</span>
-    </h1>
-
-    <p class="hero-sub reveal">En tre-dages workshop i Nordjylland for mænd, der er klar til at gøre noget ved det.</p>
 
     <div class="hero-bottom reveal">
       <div class="hero-cta">
