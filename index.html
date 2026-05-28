@@ -10,9 +10,14 @@
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="Henrik Alex Sørensen" />
+<meta property="og:url" content="https://henriksorensen.dk/" />
 <meta property="og:title" content="Henrik Alex Sørensen — Hjem til dig selv" />
 <meta property="og:description" content="En tre-dages workshop for mænd, der er klar til at gøre noget ved det. Næste hold: 26.–28. juni 2026." />
 <meta property="og:image" content="https://res.cloudinary.com/dssjlvoft/image/upload/v1777226055/kling_20260427_%E4%BD%9C%E5%93%81_Image1fjer_445_1_vku2me.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Henrik Alex Sørensen — Hjem til dig selv workshop" />
 <meta property="og:locale" content="da_DK" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Henrik Alex Sørensen — Hjem til dig selv" />
@@ -1853,37 +1858,139 @@ h1, h2, h3, h4 {
 }
 </style>
 
-<!-- Structured data: Event -->
+<!-- Structured data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Event",
-  "name": "Hjem til dig selv — 3-dages workshop for mænd",
-  "description": "En tre-dages workshop for mænd, der er klar til at gøre noget ved det. Fysisk tilstedeværelse, maks. 14 deltagere.",
-  "startDate": "2026-06-26",
-  "endDate": "2026-06-28",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "eventStatus": "https://schema.org/EventScheduled",
-  "location": {
-    "@type": "Place",
-    "name": "Sebber Kloster",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Nibe",
-      "postalCode": "9240",
-      "addressCountry": "DK"
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://henriksorensen.dk/#henrik",
+      "name": "Henrik Alex Sørensen",
+      "email": "henrik@hasworkshops.dk",
+      "url": "https://henriksorensen.dk/",
+      "jobTitle": "Workshop-facilitator og coach",
+      "description": "Henrik Alex Sørensen er uddannet coach og facilitator med speciale i personlig udvikling for mænd. Han har selv gennemgået en personlig transformation og hjælper i dag mænd med at finde hjem til sig selv.",
+      "knowsAbout": ["personlig udvikling", "maskulinitet", "gruppeprocesser", "coaching", "transformation"],
+      "worksFor": { "@id": "https://henriksorensen.dk/#service" }
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://henriksorensen.dk/#service",
+      "name": "Hjem til dig selv — workshop for mænd",
+      "url": "https://henriksorensen.dk/",
+      "email": "henrik@hasworkshops.dk",
+      "description": "Transformerende 3-dages workshop for mænd i Nordjylland. Maks. 14 deltagere per hold.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Denmark"
+      },
+      "provider": { "@id": "https://henriksorensen.dk/#henrik" },
+      "serviceType": "Personlig udviklingsworkshop",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Mænd mellem 30 og 55 år"
+      }
+    },
+    {
+      "@type": "Event",
+      "@id": "https://henriksorensen.dk/#event-2026-06",
+      "name": "Hjem til dig selv — 3-dages workshop for mænd",
+      "description": "En tre-dages workshop for mænd, der er klar til at gøre noget ved det. Fysisk tilstedeværelse, maks. 14 deltagere. Overnatning og alle måltider inkluderet.",
+      "startDate": "2026-06-26",
+      "endDate": "2026-06-28",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "Sebber Kloster",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Nibe",
+          "postalCode": "9240",
+          "addressCountry": "DK"
+        }
+      },
+      "organizer": { "@id": "https://henriksorensen.dk/#henrik" },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "url": "https://henriksorensen.dk/#tilmeld",
+        "validFrom": "2026-01-01"
+      },
+      "maximumAttendeeCapacity": 14
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://henriksorensen.dk/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hvem er workshoppen for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Den er for mænd, typisk mellem 30 og 55, der mærker, at det er tid til at gå lidt ind i sig selv. Du behøver ikke have erfaring med personlig udvikling. Du behøver ikke vide, hvad det er, der trykker. Du skal bare være klar til at være ærlig — først og fremmest med dig selv."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvor mange deltagere er der?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vi holder grupperne små — mellem 10 og 14 mænd per workshop. Det er en bevidst beslutning. Det er størrelsen, der gør, at vi kan arbejde fortroligt og personligt med hver enkelt, og at fællesskabet kan blive ægte."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvad er inkluderet i prisen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hele workshoppen, overnatning i tre dage, alle måltider, materialer og opfølgning. Du møder op fredag eftermiddag og kører hjem søndag sidst på dagen. Du skal kun selv have noget tøj med — og en notesbog, hvis du bruger en."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Skal jeg være god til at tale om følelser?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. De fleste, der kommer, har aldrig talt om det her med nogen. Det er hele pointen. Vi går langsomt, og du bestemmer selv tempoet. Ingen bliver pushet ud i noget, de ikke er klar til."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvor foregår det?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I et roligt sted i Aalborg-området — vi bruger en gård med plads til både samling og at gå alene en tur. Du får den præcise adresse og praktisk info, når du har tilmeldt dig."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Er det terapi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. Det er en transformerende workshop — ikke en behandling. Hvis du går med en aktuel psykisk lidelse, er det her ikke det rigtige sted, og jeg vil typisk henvise dig videre. Skriv endelig, hvis du er i tvivl."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvad sker der efter de tre dage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Du bliver en del af et lukket fællesskab med tidligere deltagere, og vi mødes online en gang om måneden i seks måneder efter. Det er der, det meste af det rigtige arbejde foregår — efter weekenden, i hverdagen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvad hvis jeg ikke kan på datoen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vi kører workshoppen to gange om året — forår og efterår. Skriv dig op til ventelisten, så hører du som de første, når næste hold åbner for tilmelding."
+          }
+        }
+      ]
     }
-  },
-  "organizer": {
-    "@type": "Person",
-    "name": "Henrik Alex Sørensen",
-    "email": "henrik@hasworkshops.dk"
-  },
-  "offers": {
-    "@type": "Offer",
-    "availability": "https://schema.org/InStock",
-    "url": "https://henriksorensen.dk/#tilmeld"
-  }
+  ]
 }
 </script>
 
@@ -2104,11 +2211,11 @@ h1, h2, h3, h4 {
 
   <div class="strip reveal" aria-label="Billeder fra Henriks workshops">
     <div class="strip-track">
-      <div class="strip-slide"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563180/d938eb50-0ee1-471e-92d1-4e43a64ba017_z2gtws.png" alt="Fra Henriks workshop" loading="lazy"></div>
-      <div class="strip-slide tall"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563169/cc864e41-cb26-4561-8962-1a4db3bd0d59_nmb3nk.png" alt="Fra Henriks workshop" loading="lazy"></div>
-      <div class="strip-slide"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779562889/Sk%C3%A6rmbillede_2026-05-23_204451_n0n3du.png" alt="Fra Henriks workshop" loading="lazy"></div>
-      <div class="strip-slide square"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779552545/ggg_ngzrwj.jpg" alt="Fra Henriks workshop" loading="lazy"></div>
-      <div class="strip-slide tall"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779463097/661176855_18575197846011770_4360949682931393459_n_kispdi.jpg" alt="Fra Henriks workshop" loading="lazy"></div>
+      <div class="strip-slide"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563180/d938eb50-0ee1-471e-92d1-4e43a64ba017_z2gtws.png" alt="Mænd i fordybelse og dialog under Hjem til dig selv workshoppen" loading="lazy"></div>
+      <div class="strip-slide tall"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563169/cc864e41-cb26-4561-8962-1a4db3bd0d59_nmb3nk.png" alt="Henrik Alex Sørensen faciliterer en gruppe mænd i en workshop-session" loading="lazy"></div>
+      <div class="strip-slide"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779562889/Sk%C3%A6rmbillede_2026-05-23_204451_n0n3du.png" alt="Deltagere samlet i fællesskab på Hjem til dig selv workshoppen" loading="lazy"></div>
+      <div class="strip-slide square"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779552545/ggg_ngzrwj.jpg" alt="Nærvær og ro i naturen under workshopweekenden" loading="lazy"></div>
+      <div class="strip-slide tall"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779463097/661176855_18575197846011770_4360949682931393459_n_kispdi.jpg" alt="Henrik sammen med deltagere fra en tidligere workshop" loading="lazy"></div>
       <!-- Duplicate set for seamless loop -->
       <div class="strip-slide" aria-hidden="true"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563180/d938eb50-0ee1-471e-92d1-4e43a64ba017_z2gtws.png" alt="" loading="lazy"></div>
       <div class="strip-slide tall" aria-hidden="true"><img src="https://res.cloudinary.com/dssjlvoft/image/upload/v1779563169/cc864e41-cb26-4561-8962-1a4db3bd0d59_nmb3nk.png" alt="" loading="lazy"></div>
