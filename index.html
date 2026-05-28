@@ -1888,15 +1888,17 @@ h1, h2, h3, h4 {
      ANALYTICS — replace placeholder IDs before going live
      ═══════════════════════════════════════════════════════ -->
 
-<!-- Google Analytics 4
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<!-- Google Analytics 4 — measurement ID: G-J19YJ0Q7KH -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J19YJ0Q7KH"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-J19YJ0Q7KH', {
+    anonymize_ip: true,
+    cookie_flags: 'SameSite=None;Secure'
+  });
 </script>
--->
 
 <!-- Meta Pixel
 <script>
